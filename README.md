@@ -14,7 +14,7 @@ This repository provides an end-to-end automated Deep Learning pipeline to segme
 The project is structured as a complete medical imaging pipeline, handling everything from raw NIfTI volumes to 3D morphological post-processing.
 
 ![Pipeline Architecture](docs/images/pipeline.png) 
-*> Placeholder: Insert Figure 1 (Workflow Generale) from your report here.*
+*> Full repo pipeline.*
 
 ### 1. Data Stratification & Extraction
 * **Dataset:** 120 unique patients (pre-RT and mid-RT scans).
@@ -29,7 +29,7 @@ MRI T2 scans suffer from Rician noise and ambiguous tissue boundaries. The follo
 4. **Edge Enhancement:** Sobel operators isolate biological contours, amplifying local contrast by a factor of 2.0 without boosting background noise.
 
 ![Pre-processing Steps](docs/images/preprocessing.png)
-*> Placeholder: Insert Figure 3 (Effetto dell'applicazione delle tecniche...) showing the original vs Sobel+Contrast slices.*
+*> Pre-processing steps applied sequentially to each slice.*
 
 ### 3. Deep Learning Model
 * **Architecture:** 2D U-Net implemented via `MMSegmentation`.
@@ -37,7 +37,7 @@ MRI T2 scans suffer from Rician noise and ambiguous tissue boundaries. The follo
 * **Optimization:** Batch Normalization (BN) utilized across the backbone and decode heads for stability.
 
 ![U-Net Architecture](docs/images/unet_architecture.png)
-*> Placeholder: Insert Figure 2 (Struttura della U-Net) from your report here.*
+*> U-Net architecture used in this repo.*
 
 ### 4. Tackling Severe Class Imbalance (Composite Loss)
 The dataset presents a critical imbalance: **98% background**, 1% $GTV_p$, and 1% $GTV_n$. Relying on standard Cross-Entropy leads to a collapsed model. I engineered a composite loss function:
@@ -51,7 +51,7 @@ The dataset presents a critical imbalance: **98% background**, 1% $GTV_p$, and 1
 * **3D Morphological Closing:** Utilizing spherical structuring elements (radius 1 for $GTV_p$, radius 3 for $GTV_n$) to fill internal voids and regularize anatomical surfaces.
 
 ![Post-processing Results](docs/images/postprocessing.png)
-*> Placeholder: Insert Figure 4 (or an animated GIF) showing Ground Truth vs Raw Prediction vs Post-processed Prediction.*
+*> Ground Truth vs Raw Prediction vs Post-processed Prediction.*
 
 ---
 
@@ -77,3 +77,40 @@ Clone the repository and install the strict dependencies (requires CUDA 12.1).
 git clone [https://github.com/yourusername/Head-Neck-Tumor-Segmentation.git](https://github.com/yourusername/Head-Neck-Tumor-Segmentation.git)
 cd Head-Neck-Tumor-Segmentation
 pip install -r requirements.txt
+```
+### 2. Data Preparation
+Place yout raw .nii.gz files in data/Dataset_gz/.
+Run the clinical stratification and preprocessing engine:
+```bash
+python src/preprocessing/data_splitter.py
+python src/preprocessing/slice_extractor.py
+python src/preprocessing/image_enhancement.py
+```
+### 3. Training the U-Net
+Execute the MMSegmentation pipeline:
+```bash
+python src/training/train.py --base-config src/training/unet_config.py
+```
+### 4. Inference & 3D Post-processing
+Generate predictions and apply 3D morphological closing:
+```bash
+python src/inference/predict.py --config src/training/unet_config.py --checkpoint models/best_model.pth
+```
+### 5. Clinical Evaluation
+Calculate Dice Similarity Coefficients and Volumetric Variations:
+```bash
+python src/evaluation/evaluate.py --use-postprocessed
+```
+
+---
+
+## 📬 Contact
+
+**Ing. Cristian Assumma**  
+*MSc Biomedical Engineer | AI Healthcare & MedTech*
+
+* [LinkedIn](https://www.linkedin.com/in/cristian-assumma-08890b224)
+* [GitHub](https://github.com/cristian-assumma)
+
+---
+
