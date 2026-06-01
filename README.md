@@ -78,8 +78,8 @@ While the complex and varied nature of HNC limits absolute accuracy on a basic 2
 ### 1. Environment Setup
 Clone the repository and install the strict dependencies (requires CUDA 12.1).
 ```bash
-git clone [https://github.com/yourusername/Head-Neck-Tumor-Segmentation.git](https://github.com/yourusername/Head-Neck-Tumor-Segmentation.git)
-cd Head-Neck-Tumor-Segmentation
+git clone [https://github.com/yourusername/head-neck-tumor-segmentation.git](https://github.com/yourusername/head-neck-tumor-segmentation.git)
+cd head-neck-tumor-segmentation
 pip install -r requirements.txt
 ```
 ### 2. Data Preparation
