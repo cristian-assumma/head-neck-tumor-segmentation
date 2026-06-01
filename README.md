@@ -13,7 +13,7 @@ This repository provides an end-to-end automated Deep Learning pipeline to segme
 
 The project is structured as a complete medical imaging pipeline, handling everything from raw NIfTI volumes to 3D morphological post-processing.
 
-![Pipeline Architecture](assets/pipeline.png) 
+![Pipeline Architecture](docs/images/pipeline.png) 
 *> Placeholder: Insert Figure 1 (Workflow Generale) from your report here.*
 
 ### 1. Data Stratification & Extraction
@@ -28,7 +28,7 @@ MRI T2 scans suffer from Rician noise and ambiguous tissue boundaries. The follo
 3. **Median Filtering** ($3\times3$) to suppress salt-and-pepper artifacts.
 4. **Edge Enhancement:** Sobel operators isolate biological contours, amplifying local contrast by a factor of 2.0 without boosting background noise.
 
-![Pre-processing Steps](assets/preprocessing.png)
+![Pre-processing Steps](docs/images/preprocessing.png)
 *> Placeholder: Insert Figure 3 (Effetto dell'applicazione delle tecniche...) showing the original vs Sobel+Contrast slices.*
 
 ### 3. Deep Learning Model
@@ -36,7 +36,7 @@ MRI T2 scans suffer from Rician noise and ambiguous tissue boundaries. The follo
 * **Transfer Learning:** Initialized with Cityscapes pre-trained weights to accelerate convergence on a limited medical dataset.
 * **Optimization:** Batch Normalization (BN) utilized across the backbone and decode heads for stability.
 
-![U-Net Architecture](assets/unet_architecture.png)
+![U-Net Architecture](docs/images/unet_architecture.png)
 *> Placeholder: Insert Figure 2 (Struttura della U-Net) from your report here.*
 
 ### 4. Tackling Severe Class Imbalance (Composite Loss)
@@ -50,7 +50,7 @@ The dataset presents a critical imbalance: **98% background**, 1% $GTV_p$, and 1
 * **Spurious Artifact Removal:** Filtering out isolated connected components (< 50 voxels for $GTV_p$, < 1200 voxels for $GTV_n$).
 * **3D Morphological Closing:** Utilizing spherical structuring elements (radius 1 for $GTV_p$, radius 3 for $GTV_n$) to fill internal voids and regularize anatomical surfaces.
 
-![Post-processing Results](assets/postprocessing.png)
+![Post-processing Results](docs/images/postprocessing.png)
 *> Placeholder: Insert Figure 4 (or an animated GIF) showing Ground Truth vs Raw Prediction vs Post-processed Prediction.*
 
 ---
