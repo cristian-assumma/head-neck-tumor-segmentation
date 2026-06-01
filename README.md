@@ -71,6 +71,10 @@ While the complex and varied nature of HNC limits absolute accuracy on a basic 2
 
 ## 🚀 Usage & Reproducibility
 
+### Download trained weights at this link:
+
+`https://www.kaggle.com/datasets/cristianassumma/best-model-for-u-net-mri-head-neck-tumor-segment`
+
 ### 1. Environment Setup
 Clone the repository and install the strict dependencies (requires CUDA 12.1).
 ```bash
