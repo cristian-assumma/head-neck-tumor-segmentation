@@ -82,11 +82,11 @@ To verify the inference pipeline without downloading the full dataset or trainin
    Execute the following command. The script will load the T2 volume, run the 2D U-Net slice-by-slice, apply the 3D morphological post-processing, and save the result.
    
    ```bash
-   python src/inference/predict.py \
-     --dataset-dir data/Dataset_gz \
-     --excel-path data/sample_test.xlsx \
-     --output-dir data/Inference_Results \
-     --config src/training/unet_config.py \
+   py src/inference/predict.py `
+     --dataset-dir data/Dataset_gz `
+     --excel-path data/sample_test.xlsx `
+     --output-dir data/Inference_Results `
+     --config src/training/unet_config.py `
      --checkpoint models/best_model.pth
     ```
    *> (Note: The script attempts to process both `preRT` and `midRT` timepoints. A `FileNotFoundError` for the `midRT` file is expected for this quickstart sample, as only the `preRT` scan is provided here).*
@@ -94,6 +94,7 @@ To verify the inference pipeline without downloading the full dataset or trainin
 3. **Check the Output:**
    The segmented 3D volume will be saved in `data/Inference_Results/135/SEG_135_preRT_T2_post.nii.gz`.
 
+---
 
 ### 1. Environment Setup
 Clone the repository and install the strict dependencies (requires CUDA 12.1).
