@@ -1,3 +1,9 @@
+import sys
+import mmcv
+mmcv.__version__ = '2.1.0'
+import sys
+import mmcv
+mmcv.__version__ = '2.1.0'
 import os
 import argparse
 import numpy as np
@@ -126,9 +132,16 @@ def main():
                 post_mask_3d = apply_3d_morphological_closing(raw_mask_3d, min_sizes, radii)
 
                 # Save finalized volume
-                output_filename = f"SEG_{os.path.basename(nii_path).replace('.nii.gz', '_post.nii.gz').replace('.nii', '_post.nii')}"
+                base_name = os.path.basename(nii_path)
+                clean_name = base_name.replace("_post", "")
+
+                if clean_name.endswith('.nii.gz'):
+                    output_filename = f"SEG_{clean_name[:-7]}_post.nii.gz"
+                elif clean_name.endswith('.nii'):
+                    output_filename = f"SEG_{clean_name[:-4]}_post.nii"
+
                 output_path = os.path.join(output_patient_folder, output_filename)
-                
+
                 nifti_img = nib.Nifti1Image(post_mask_3d, affine=vol_nifti.affine, header=vol_nifti.header)
                 nib.save(nifti_img, output_path)
 
