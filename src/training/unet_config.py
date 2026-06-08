@@ -1,3 +1,10 @@
+import os
+
+PROJECT_ROOT = os.getenv('PROJECT_ROOT', './')
+DATA_ROOT = os.getenv('DATA_ROOT', os.path.join(PROJECT_ROOT, 'data/Preprocessed_dataset_finale'))
+WORK_DIR = os.getenv('WORK_DIR', os.path.join(PROJECT_ROOT, 'models/weights_unet_80CRI16'))
+PRETRAINED_WEIGHTS = os.getenv('PRETRAINED_WEIGHTS', os.path.join(PROJECT_ROOT, 'models/best_model.pth'))
+
 crop_size = (
     256,
     256,
@@ -21,7 +28,7 @@ data_preprocessor = dict(
         57.375,
     ],
     type='SegDataPreProcessor')
-data_root = '/content/drive/MyDrive/Colab Notebooks/PROGETTO/Preprocessed_dataset_finale'
+data_root = DATA_ROOT
 dataset_type = 'TumorHNDataset'
 default_hooks = dict(
     checkpoint=dict(
@@ -43,7 +50,7 @@ img_ratios = [
     1.05,
 ]
 launcher = 'none'
-load_from = '/content/drive/MyDrive/Colab Notebooks/PROGETTO/checkpoints/fcn_unet_s5-d16_4x4_512x1024_160k_cityscapes_20211210_145204-6860854e.pth'
+load_from = PRETRAINED_WEIGHTS
 log_level = 'INFO'
 log_processor = dict(by_epoch=False)
 model = dict(
@@ -330,7 +337,7 @@ visualizer = dict(
     vis_backends=[
         dict(type='LocalVisBackend'),
     ])
-work_dir = '/content/drive/MyDrive/Colab Notebooks/PROGETTO/weights_unet_80CRI16'
+work_dir = WORK_DIR
 workflow = [
     (
         'train',
