@@ -185,7 +185,7 @@ test_dataloader = dict(
     dataset=dict(
         data_prefix=dict(
             img_path='leftImg8bit/val', seg_map_path='gtFine/val'),
-        data_root='data/cityscapes/',
+        data_root=DATA_ROOT,
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=True, scale=(
@@ -217,7 +217,7 @@ train_dataloader = dict(
     batch_size=16,
     dataset=dict(
         data_prefix=dict(img_path='train/images', seg_map_path='train/masks'),
-        data_root=
+        data_root=DATA_ROOT
         '/content/drive/MyDrive/Colab Notebooks/PROGETTO/Preprocessed_dataset_finale',
         pipeline=[
             dict(type='LoadImageFromFile'),
@@ -285,8 +285,7 @@ val_dataloader = dict(
     batch_size=16,
     dataset=dict(
         data_prefix=dict(img_path='val/images', seg_map_path='val/masks'),
-        data_root=
-        '/content/drive/MyDrive/Colab Notebooks/PROGETTO/Preprocessed_dataset_finale',
+        data_root=DATA_ROOT,
         pipeline=[
             dict(type='LoadImageFromFile'),
             dict(keep_ratio=False, scale=(
@@ -331,8 +330,7 @@ visualizer = dict(
             0,
         ],
     ],
-    save_dir=
-    '/content/drive/MyDrive/Colab Notebooks/PROGETTO/weights_unet_80CRI16',
+    save_dir=WORK_DIR,
     type='SegLocalVisualizer',
     vis_backends=[
         dict(type='LocalVisBackend'),
