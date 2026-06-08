@@ -1,9 +1,6 @@
 import sys
 import mmcv
 mmcv.__version__ = '2.1.0'
-import sys
-import mmcv
-mmcv.__version__ = '2.1.0'
 import os
 import argparse
 import numpy as np
